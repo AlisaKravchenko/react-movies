@@ -1,39 +1,33 @@
-import React from 'react'
-import { Main } from '../layout/Main'
+import React, { useState } from 'react'
 
-export class Search extends React.Component {
-    state = {
-        search: '',
-    }
+export const Search = (props) => {
+    const [search, setSearch] = useState('')
 
-    handleKey = (event) => {
+    const handleKey = (event) => {
         if (event.key === 'Enter') {
-            this.props.search(this.state.search)
+            props.search(search)
         }
     }
-
-    render() {
-        return (
-            <div className='row'>
-                <div className='input-field'>
-                    <input
-                        className='validate'
-                        id='email_inline'
-                        type='email'
-                        placeholder='Search films'
-                        onChange={(e) => {
-                            this.setState({ search: e.target.value })
-                        }}
-                        onKeyDown={this.keyEnter}
-                    ></input>
-                    <button
-                        className='btn search-btn'
-                        onClick={() => this.props.search(this.state.search)}
-                    >
-                        Search
-                    </button>
-                </div>
+    return (
+        <div className='row'>
+            <div className='input-field'>
+                <input
+                    className='validate'
+                    id='email_inline'
+                    type='email'
+                    placeholder='Search films'
+                    onChange={(e) => {
+                        setSearch(e.target.value)
+                    }}
+                    onKeyDown={handleKey}
+                ></input>
+                <button
+                    className='btn search-btn'
+                    onClick={() => props.search(search)}
+                >
+                    Search
+                </button>
             </div>
-        )
-    }
+        </div>
+    )
 }
